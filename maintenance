@@ -1,0 +1,16 @@
+  # -----------------------------------------------
+  # place in your SERVER block:
+  # include /etc/nginx/sites-available/maintenance;
+  # -----------------------------------------------
+
+  error_page 503 @maintenance;
+  error_page 502 @maintenance;
+
+  location @maintenance {
+     root   /etc/nginx/html/502;
+     rewrite ^(.*)$ /index.html break;
+  }
+
+  location  /502/ {
+     root /etc/nginx/html;
+  }
